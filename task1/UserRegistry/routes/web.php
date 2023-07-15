@@ -11,6 +11,13 @@
 |
 */
 
+
+use App\Http\Controllers\UserListing;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/users', [UserListing::class, 'index'])->name('userListing');
+Route::get('/users', '\App\Http\Controllers\UserListing@index');

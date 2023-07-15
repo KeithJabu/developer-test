@@ -1,8 +1,7 @@
 <?php
 
+use app\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,31 +12,36 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
+        $users = [
             [
-                'name'     => 'Shannon',
-                'surname'  => 'James',
-                'email'    => str_random(10).'@gmail.com',
-                'position' => 'Secretary',
+                'name'       => 'Shannon',
+                'surname'    => 'James',
+                'email'      => str_random(10).'@gmail.com',
+                'position'   => 'Secretary'
             ],
             [
                 'name'     => 'Peter',
                 'surname'  => 'Micheal',
                 'email'    => str_random(10).'@gmail.com',
-                'position' => 'Admin',
+                'position' => 'Admin'
             ],
             [
                 'name'     => 'Keith',
                 'surname'  => 'Msimango',
                 'email'    => str_random(10).'@gmail.com',
-                'position' => 'Tech',
+                'position' => 'Tech'
             ],
             [
                 'name'     => 'Patrick',
                 'surname'  => 'Molefe',
                 'email'    => str_random(10).'@gmail.com',
-                'position' => 'Consultant',
+                'position' => 'Consultant'
             ]
-        );
+        ];
+
+        foreach($users as $user){
+            User::create($user);
+        }
+
     }
 }
