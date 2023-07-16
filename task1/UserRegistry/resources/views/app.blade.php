@@ -13,13 +13,14 @@
             <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
             <!-- Custom styles for this template -->
-
             <title>@yield('title')</title>
+            <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
         @show
     </head>
 
     <body>
-        <div id="app" class="max-w-screen-xl mx-auto font-body">
+        @include('partials.errors')
+        <div id="app" class="max-w-screen-xl mx-auto font-body" style="margin-top: -80px;">
             @yield('main')
         </div>
     </body>
@@ -49,6 +50,4 @@
 
     </style>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
 </html>

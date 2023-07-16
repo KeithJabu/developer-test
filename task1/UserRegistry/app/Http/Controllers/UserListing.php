@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use app\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserListing extends Controller
@@ -20,69 +21,50 @@ class UserListing extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store new User data
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * @param Request $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        //
-    }
+        $user = User::firstOrCreate([
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'position' => $request->input('position'),
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($user->wasRecentlyCreated) {
+            $data = [
+                'message' => 'New user Created !',
+            ];
+        } else {
+            $data = [
+                'message' => 'User already Exists!',
+            ];
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $user_id
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $user_id): JsonResponse
     {
-        //
+        $user = User::find($user_id);
+        $user->delete();
+
+        $data = [
+            'message' => 'User Deleted',
+        ];
+
+        return response()->json($data);
     }
 
 }
