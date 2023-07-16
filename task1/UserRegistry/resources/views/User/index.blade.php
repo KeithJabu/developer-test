@@ -153,6 +153,10 @@
                     },
                     error: function(xhr) {
                         console.log(xhr.responseText)
+
+                        if (xhr.responseText.message) {
+                            alert('duplicate')
+                        }
                     }
                 });
             } else {

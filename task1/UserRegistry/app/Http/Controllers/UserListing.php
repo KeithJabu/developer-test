@@ -16,7 +16,7 @@ class UserListing extends Controller
      *
      * @return Factory|Application|View
      */
-    public function index()
+    public function index(): View
     {
         $users = User::all();
 
@@ -32,17 +32,21 @@ class UserListing extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $user = User::firstOrCreate([
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'email' => $request->input('email'),
-            'position' => $request->input('position'),
-        ]);
+        $data = [];
 
-        if ($user->wasRecentlyCreated) {
-            $data = [
-                'message' => 'New user Created !',
-            ];
+        if (! User::userExists($request->input('email'))){
+            $user = User::firstOrCreate([
+                'name' => $request->input('name'),
+                'surname' => $request->input('surname'),
+                'email' => $request->input('email'),
+                'position' => $request->input('position'),
+            ]);
+
+            if ($user->wasRecentlyCreated) {
+                $data = [
+                    'message' => 'New user Created !',
+                ];
+            }
         } else {
             $data = [
                 'message' => 'User already Exists!',

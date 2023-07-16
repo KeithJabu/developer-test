@@ -15,6 +15,20 @@
             <!-- Custom styles for this template -->
             <title>@yield('title')</title>
             <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+
+            <style>
+                body {
+                    padding-top: 3.5rem;
+                }
+
+                a {
+                    color: #ac0229;
+                }
+
+                .table-striped tbody tr:nth-of-type(odd) {
+                    background-color: rgb(235 235 235);
+                }
+            </style>
         @show
     </head>
 
@@ -24,30 +38,4 @@
             @yield('main')
         </div>
     </body>
-
-   <?php // @include('includes.scripts') ?>
-
-
-    <style>
-        @media screen and (max-width: 768px) {
-            .zsiq_floatmain {
-                bottom: 65px;
-            }
-        }
-
-        body {
-            padding-top: 3.5rem;
-        }
-
-        a {
-            color: #ac0229;
-        }
-
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgb(235 235 235);
-        }
-
-
-    </style>
-
 </html>
