@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use app\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserListing extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|Application|View
      */
     public function index()
     {
@@ -27,7 +30,7 @@ class UserListing extends Controller
      *
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $user = User::firstOrCreate([
             'name' => $request->input('name'),

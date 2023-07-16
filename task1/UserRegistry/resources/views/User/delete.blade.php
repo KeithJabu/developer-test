@@ -4,6 +4,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteUserModalLabel">Confirm delete</h5>
             </div>
+
             <div class="model-body">
                 <div class="col-sm-11">
                     <form action="post" id="delete-user-form">

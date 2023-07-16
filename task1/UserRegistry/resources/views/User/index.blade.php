@@ -1,5 +1,6 @@
 @extends('app')
 @section('title', 'User Listings | ePETstore')
+
 @section('head')
     @parent
     <link rel="canonical" href="{{ url()->current() }}">
@@ -8,7 +9,6 @@
 
 @section('main')
     <main role="main">
-        <!-- Main jumbotron for a primary marketing message or call to action -->
         <!-- Jumbotron -->
         <div class="bg-image d-flex justify-content-center align-items-center"
                 style="background-image: url('https://mdbcdn.b-cdn.net/img/new/fluid/nature/015.webp');
@@ -18,7 +18,6 @@
         <!-- Jumbotron -->
 
         <div class="container">
-            <!-- Example row of columns -->
             <div class="row">
                 <div class="col-md-9 offset-md-2">
                     <div class="float-right" style="padding-bottom: 10px; padding-top: 20px">
@@ -43,7 +42,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td> There are no users at this point in time </td>
+                                <td> There are no Uers at this point in time </td>
                             </tr>
                         @endif
                     </table>
@@ -53,8 +52,8 @@
     </main>
 @endsection
 
-@include('User.create');
-@include('User.delete');
+@include('User.create')
+@include('User.delete')
 
 <style>
     body {
@@ -91,68 +90,59 @@
     $(document).ready(function () {
         $('#add-user-form').submit(function (e) {
             e.preventDefault();
+            resetFields();
             spinner(0);
+            let errors = false;
+            var token = $('#token').val();
 
             let name = $('#name').val();
-            let errors = false;
-
-            var token = $("#token").val();
-
-            if (name.length == 0) {
-                $('#error-name').append("PLease Enter you name").show();
+            if (name.length === 0) {
+                $('#error-name').append("Please Enter you name").show();
                 errors = true;
             } else {
                 $("#error-name").html("");
             }
 
             let surname = $('#surname').val();
-            if (surname.length == 0) {
-                $('#error-surname').append("PLease Enter you surname").show();
+            if (surname.length === 0) {
+                $('#error-surname').append("Please enter you surname").show();
                 errors = true;
             } else {
                 $("#error-surname").html("");
             }
 
             let email = $('#email').val();
-            if (email.length == 0) {
-                $('#error-email').append("PLease Enter you surname").show();
+            if (email.length === 0) {
+                $('#error-email').append("Please enter you email").show();
                 errors = true;
             } else if (!IsEmail(email)) {
                 errors = true;
-                $('#error-email').append("email is not valid").show();
+                $('#error-email').append("Please enter a valid email address").show();
             } else {
                 $("#error-email").html("");
             }
 
             let position = $('#position').val();
-            if (position.length == 0) {
-                $('#error-position').append("PLease Enter you position").show();
+            if (position.length === 0) {
+                $('#error-position').append("Please enter you position").show();
                 errors = true;
             } else {
                 $("#error-position").html("");
             }
 
-
             if (!errors) {
-                //console.log(formData.leng);
-                let datastring = "name=" + name + "&surname=" + surname + "&email=" + email + "&position=" + position + "&_token=" + token;
                 let dataset = {"name": name, "surname": surname, "email": email, "position": position, '_token' : token};
-
-                const formData = $(this);
-                var url = $(this).attr("data-link");
 
                 $.ajaxSetup({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
                 });
 
-                console.log(formData.serialize());
-                console.log(datastring);
                 $.ajax({
                     url: '/api/user/create',
-                    type : 'POST',
-                    data    : dataset,
+                    type: 'POST',
+                    data: dataset,
                     dataType: 'json',
-                    encode  : true,
+                    encode: true,
                     method: 'POST',
                     success:function(response)
                     {
@@ -198,11 +188,14 @@
     function IsEmail(email) {
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-        if (!regex.test(email)) {
-            return false;
-        } else {
-            return true;
-        }
+        return regex.test(email);
+    }
+
+    function resetFields() {
+        $("#error-position").html("");
+        $("#error-name").html("");
+        $("#error-surname").html("");
+        $("#error-email").html("");
     }
 
     function spinner(errors) {
@@ -218,5 +211,3 @@
         $('#deleteUserModal').modal('show');
     }
 </script>
-
-

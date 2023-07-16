@@ -4,6 +4,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="addUserModalLabel">Add new User</h5>
             </div>
+
             <div class="model-body">
                 <div class="col-sm-11">
                     <form action="post" id="add-user-form">
@@ -11,31 +12,31 @@
                             <input type="hidden" value="{{ csrf_token() }}" id="token" name="_token"/>
                             <label> Name </label>
                             <p>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                           name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
-                                    <span class="invalid-feedback" id="error-name" role="alert"></span>
-                                </p>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                       name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
+                                <span class="invalid-feedback" id="error-name" role="alert"></span>
+                            </p>
 
-                            <label> Surname Name </label>
+                            <label> Surname </label>
                             <p>
-                                    <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror"
-                                           name="surname" value="{{ old('surname') }}"  autocomplete="surname" autofocus>
-                                    <span class="invalid-feedback" id="error-surname" role="alert"></span>
-                                </p>
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror"
+                                       name="surname" value="{{ old('surname') }}"  autocomplete="surname" autofocus>
+                                <span class="invalid-feedback" id="error-surname" role="alert"></span>
+                            </p>
 
-                            <label> Email Name </label>
+                            <label> Email </label>
                             <p>
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
                                        name="email" value="{{ old('email') }}"  autocomplete="email" autofocus>
                                 <span class="invalid-feedback" id="error-email" role="alert"></span>
                             </p>
 
-                            <label> Position</label>
+                            <label> Position </label>
                             <p>
-                                    <input id="position" type="text" class="form-control @error('position') is-invalid @enderror"
-                                           name="position" value="{{ old('position') }}"  autocomplete="position" autofocus>
-                                    <span class="invalid-feedback" id="error-position" role="alert"></span>
-                                </p>
+                                <input id="position" type="text" class="form-control @error('position') is-invalid @enderror"
+                                       name="position" value="{{ old('position') }}"  autocomplete="position" autofocus>
+                                <span class="invalid-feedback" id="error-position" role="alert"></span>
+                            </p>
                         </div>
 
                         <div class="float-right" role="group">
