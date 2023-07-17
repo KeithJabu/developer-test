@@ -214,4 +214,33 @@
         $('input[name="delete_id"]').val(id);
         $('#deleteUserModal').modal('show');
     }
+
+    function isPasswordValid(password) {
+        var isValid = false;
+
+        // Write you logic here
+        if (password.length > 7) {
+            if (password[0] === password[0].toUpperCase()){
+                if (hasNumber(password)) {
+                    isValid = true;
+                } else {
+                    isValid = 'the password must contail atleast one number';
+                }
+            } else {
+                isValid = 'the first character must be a capital letter';
+            }
+        } else {
+            isValid = 'Your password must be 8 characters long of more';
+        }
+
+        return isValid;
+    }
+
+    function hasNumber(string) {
+        return /\d/.test(string);
+    }
+
+    console.log(isPasswordValid($string));
+
+
 </script>
