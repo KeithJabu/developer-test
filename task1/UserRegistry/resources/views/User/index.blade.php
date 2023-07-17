@@ -216,3 +216,20 @@
     }
 
 </script>
+
+<?php
+$messageStmt = $db->query('select message_text from messages where message_id = 1');
+$messageStmt->execute();
+$message = $messageStmt->fetch(PDO::FETCH_OBJ);
+?>
+<div><?php echo $message->message_text; ?></div>
+
+
+
+<?php
+$messageStmt = $db->query('select '. mysqli_real_escape_string('message_text') . ' from `messages` where `message_id` = “1”');
+$messageStmt->execute();
+$message = $messageStmt->fetchAll(PDO::FETCH_OBJ);
+?>
+<div><?php echo $message->message_text; ?></div>
+
