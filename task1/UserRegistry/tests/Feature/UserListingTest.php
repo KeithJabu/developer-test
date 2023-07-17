@@ -2,10 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\User;
+use App\Models\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserListingTest extends TestCase
 {
@@ -16,8 +14,32 @@ class UserListingTest extends TestCase
      */
     public function testController()
     {
-        $response = $this->get('/');
-        $this->assertTrue(true);
+        $response = $this->get('/users');
+        $response->assertStatus(200);
+    }
+
+    public function testUserCreationAndDelete()
+    {
+        // First The user is created
+        $user = User::create([
+            'name'       => 'Shannon',
+            'surname'    => 'James',
+            'email'      => str_random(10) . '@gmail.com',
+            'position'   => 'Secretary'
+        ]);
+
+        //act as user
+        $this->actingAs($user);
+
+        if ($user) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+
+        // Then we want to make sure a profile page is created
+        $response = $this->post('/api/users/destroy/'. $user->id);
+        $response->assertStatus(200);
     }
 
     public function testUserExisitng()

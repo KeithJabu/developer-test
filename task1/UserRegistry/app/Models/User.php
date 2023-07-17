@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace app\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,14 +27,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function checkUserbyEmail(string $email) {
+    public function checkUserByEmail(string $email)
+    {
         return User::query()->where('email', $email)->first();
 
     }
 
     public static function userExists(string $user_email): bool
     {
-        $user = (new User)->checkUserbyEmail($user_email);
+        $user = (new User)->checkUserByEmail($user_email);
 
         if ($user) {
             return TRUE;
